@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Grafy dwudzielne: Plik źródłowy graph.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Grafy dwudzielne
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">graph.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;graph.h&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;Graph::Graph()</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    this-&gt;mEdges = map&lt;int, set&lt;int&gt;&gt;();</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    this-&gt;mColors = map&lt;int, bool&gt;();</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;}</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;Graph::~Graph()</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    this-&gt;mEdges.clear();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    this-&gt;mColors.clear();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classGraph.html#a5ac2ab2b23951f000335efd7d9cbb69f">   16</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classGraph.html#a5ac2ab2b23951f000335efd7d9cbb69f">Graph::AddEdge</a>(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    this-&gt;mEdges[a].insert(b);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    this-&gt;mEdges[b].insert(a);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classGraph.html#a6a36554d34f68b9063ad49c57fef66b9">   22</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classGraph.html#a6a36554d34f68b9063ad49c57fef66b9">Graph::IsBigraph</a>()</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">//tworzymy kolejke do urzycia w algorytmie BFS</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    queue&lt;int&gt; q;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">//czyscimy aktualne grupy wierzcholkow</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    this-&gt;mColors.clear();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">//odwiedzamy wszystkie spojne skladowe</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;[vertex, _] : this-&gt;mEdges)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="comment">//jezeli wierzcholek ma juz przypisana grupe to idz dalej</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">//wierzcholek ten jest w spojnej skladowej ktora sprawdzilismy</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">if</span> (this-&gt;mColors.count(vertex) != 0)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">//ustaw pierwszemu wierzcholkowi ze spojnej grupe na 1</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">//i dodaj go do kolejki</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        this-&gt;mColors[vertex] = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        q.push(vertex);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="comment">//algorytm BSF</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">while</span> (!q.empty())</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;p = q.front();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;x : this-&gt;mEdges[p])</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="comment">//jezeli sasiad aktualnie przegladanego sasiada ma juz grupe</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="keywordflow">if</span> (this-&gt;mColors.count(x) != 0)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <span class="comment">//to sprawdz czy grupy sa rowne</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    <span class="keywordflow">if</span> (this-&gt;mColors[x] == this-&gt;mColors[p])</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        <span class="comment">//jezeli tak to graf nie jest dwudzielny</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                        this-&gt;mColors.clear();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="comment">//wpp ustaw grupe sasiada na przciwna grupe aktualnego wierzcholka</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                this-&gt;mColors[x] = !this-&gt;mColors[p];</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                q.push(x);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            q.pop();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classGraph.html#a7407e34ad71d3b7cf7a93201daddc528">   68</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classGraph.html#a7407e34ad71d3b7cf7a93201daddc528">Graph::PrintGraph</a>(ostream &amp;outputStream)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;[vertex, edges] : this-&gt;mEdges)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        outputStream &lt;&lt; vertex &lt;&lt; <span class="stringliteral">&quot;:&quot;</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;x : edges)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            outputStream &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        outputStream &lt;&lt; endl;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classGraph.html#ae5c36e66bddc4613bf61c5366c24996a">   79</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classGraph.html#ae5c36e66bddc4613bf61c5366c24996a">Graph::PrintSets</a>(ostream &amp;outputStream)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    outputStream &lt;&lt; <span class="stringliteral">&quot;Grupa 1:&quot;</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;[vertex, color] : this-&gt;mColors)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">if</span> (color)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            outputStream &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; vertex;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    outputStream &lt;&lt; endl</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                 &lt;&lt; <span class="stringliteral">&quot;Grupa 2:&quot;</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;[vertex, color] : this-&gt;mColors)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> (!color)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            outputStream &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; vertex;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    outputStream &lt;&lt; endl;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
+<div class="ttc" id="aclassGraph_html_a5ac2ab2b23951f000335efd7d9cbb69f"><div class="ttname"><a href="classGraph.html#a5ac2ab2b23951f000335efd7d9cbb69f">Graph::AddEdge</a></div><div class="ttdeci">void AddEdge(int a, int b)</div><div class="ttdoc">Funkcja dodajaca krawedz pomiedzy dwoma wierzcholkami.</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00016">graph.cpp:16</a></div></div>
+<div class="ttc" id="aclassGraph_html_a6a36554d34f68b9063ad49c57fef66b9"><div class="ttname"><a href="classGraph.html#a6a36554d34f68b9063ad49c57fef66b9">Graph::IsBigraph</a></div><div class="ttdeci">bool IsBigraph()</div><div class="ttdoc">Funkcja sprawdzajaca dwudzielnosc grafu.</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00022">graph.cpp:22</a></div></div>
+<div class="ttc" id="aclassGraph_html_a7407e34ad71d3b7cf7a93201daddc528"><div class="ttname"><a href="classGraph.html#a7407e34ad71d3b7cf7a93201daddc528">Graph::PrintGraph</a></div><div class="ttdeci">void PrintGraph(ostream &amp;outputStream)</div><div class="ttdoc">Wypisz graf na strumien wyjsciowy.</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00068">graph.cpp:68</a></div></div>
+<div class="ttc" id="aclassGraph_html_ae5c36e66bddc4613bf61c5366c24996a"><div class="ttname"><a href="classGraph.html#ae5c36e66bddc4613bf61c5366c24996a">Graph::PrintSets</a></div><div class="ttdeci">void PrintSets(ostream &amp;outputStream)</div><div class="ttdoc">Wypisz 2 zbiory wierzcholkow na strumien wyjsciowy. Powinna byc uzywana tylko po sprawdzeniu dwudziel...</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00079">graph.cpp:79</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
